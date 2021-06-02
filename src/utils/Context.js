@@ -18,7 +18,7 @@ const Context = () => {
     // convert function
     from: 'USD',
     to: 'EUR',
-    amount: 1
+    amount: 1.01
   })
 
   const [sOptions, setSOptions] = useState({
@@ -35,12 +35,17 @@ const Context = () => {
 
   const [isVisible, setVisible] = useState({
     fromSearch: false,
-    toSearch: false
+    toSearch: false,
   });
 
   const [transition, setTransition] = useState({
     fromSearch: false,
-    toSearch: false
+    toSearch: false,
+  })
+
+  const [results, setResults] = useState({
+    transition: false,
+    reveal: false
   })
 
 
@@ -48,6 +53,12 @@ const Context = () => {
     setInput({ ...input, [target.name]: target.value })
     // change setSOptions based off of search
     relevantSearch(target.name, target.value)
+    if (results.reveal) {
+      setResults({ ...results, transition: false })
+      setTimeout(() => {
+        setResults({ ...results, reveal: false })
+      }, 400);
+    }
   }
 
   // const onEnter = () => {
@@ -68,7 +79,8 @@ const Context = () => {
       .catch(err => console.log(err))
   }
 
-  const convert = () => {
+  const convert = (event) => {
+    event.preventDefault()
     // first convert to 1 of from
     // start is 1 eu
     // 1 eu = x of from
@@ -76,12 +88,18 @@ const Context = () => {
     // x of from * rate of to == exchange
     // exchange * multiplier * amount
 
+    // change base
     let multiplier = 1 / rates[input.from]
-    let exchange = rates[input.from] * rates[input.to]
-    let exchangeTotal = multiplier * exchange * rates[input.amount]
-    let oneFrom = multiplier * exchange
+    // one base = how many new currency
+    let xChangeRate = rates[input.to] * multiplier
+    // total accounting amount inputted
+    let exchangeTotal = xChangeRate * input.amount
 
-    setExchange({ ...exchange, xRate: oneFrom, total: exchangeTotal })
+    setExchange({ ...exchange, xRate: xChangeRate, total: exchangeTotal })
+    setResults({ transition: false, reveal: true })
+    setTimeout(() => {
+      setResults({ reveal: true, transition: true })
+    }, 100);
   }
 
 
@@ -124,9 +142,9 @@ const Context = () => {
 
 
   const handleHideDrop = () => {
-    setTransition({ fromSearch: false, toSearch: false })
+    setTransition({ ...transition, fromSearch: false, toSearch: false })
     setTimeout(() => {
-      setVisible({ from: false, to: false });
+      setVisible({ ...isVisible, from: false, to: false });
     }, 300);
   }
 
@@ -134,12 +152,12 @@ const Context = () => {
     const otherTarget = target.name == 'fromSearch' ? 'fromSearch' : 'toSearch'
     setVisible({ ...isVisible, [target.name]: true })
     setTimeout(() => {
-      setTransition({ [otherTarget.name]: false, [target.name]: true })
+      setTransition({ results: transition.results, [otherTarget.name]: false, [target.name]: true })
     }, 100);
 
     setTransition({ ...transition, [otherTarget.name]: false })
     setTimeout(() => {
-      setVisible({ [target.name]: true, [otherTarget.name]: false })
+      setVisible({ results: isVisible.results, [target.name]: true, [otherTarget.name]: false })
     }, 500);
   }
 
@@ -165,6 +183,7 @@ const Context = () => {
     handleClickSearchItem,
 
     ref, isVisible, setVisible, transition, setTransition, handleHideDrop, handleShowDrop, handleClickOutside,
+    results
   }
 
 
