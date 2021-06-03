@@ -161,17 +161,12 @@ const Card = () => {
 
             </ButtonWrapper>
 
-
-
           </Wrapper>
 
         </Main>
 
         {results.reveal &&
           <Result transition={results.transition}>
-
-
-
 
             <RatesContainer>
               <RatesHeader>
