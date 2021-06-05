@@ -22,7 +22,7 @@ const Home = () => {
 export default Home
 
 const Main = styled.div`
-  padding: 100px;
+  padding: 200px 100px;
   min-height: 100vh;
   height: 100%;
   background: #333333;

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ArrowNarrowRight } from '@styled-icons/heroicons-solid/'
 
 
 export const Label = styled.h4`
@@ -18,21 +19,7 @@ export const Main = styled.div`
   box-shadow: 2px 2px 15px -5px #000000;
 `
 
-export const Result = styled.div`
-  height: 300px;
-  /* background: #ffffff; */
-  display: flex;
-  /* padding: 30px; */
-  justify-content: space-between;
-  /* border-radius: 10px; */
-  width: 900px;
-  /* box-shadow: 2px 2px 15px -5px #000000; */
-  top: 220px;
-  transition: .3s all ease-in-out;
-  opacity: ${({ transition }) => transition ? 1 : 0};
-  transform: ${({ transition }) => transition ? 'translateY(0) ' : 'translateY(50px) '};
-  position: absolute;
-`
+
 
 export const InputWrapper = styled.div`
   display: flex; 
@@ -63,7 +50,6 @@ export const SelectWrapper = styled.div`
   transition: .3s all ease-in-out;
   opacity: ${({ show }) => show ? 1 : 0};
   transform: ${({ show }) => show ? 'translateY(0) ' : 'translateY(5px) '};
-  z-index: 1;
   `
 
 export const ButtonWrapper = styled.div`
@@ -199,23 +185,60 @@ export const Switch = styled.div`
 `
 
 export const RatesContainer = styled.div`
-  width: 49%;
+  width: 32%;
   display: flex;
   /* margin: 7px; */
   flex-direction: column;
   box-shadow: 2px 2px 15px -5px #000000;
   border-radius: 10px;
   background: white;
+  padding: 0 25px;
 `
 
 export const RatesHeader = styled.div`
   width: 100%;
-  height: 55px;
+  height: 35px;
+  margin: 10px 0;
+  border-bottom: 1px solid gray;
   color: #292929;
-  background: #c7ffb1;
-  border-radius: 10px 10px 0 0;
+  /* background: #c7ffb1; */
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
 `
 
+export const Result = styled.div`
+  height: 130px;
+  /* background: #ffffff; */
+  display: flex;
+  /* padding: 30px; */
+  justify-content: space-between;
+  /* border-radius: 10px; */
+  width: 900px;
+  /* box-shadow: 2px 2px 15px -5px #000000; */
+  top: 220px;
+  transition: .3s all ease-in-out;
+  opacity: ${({ transition }) => transition ? 1 : 0};
+  transform: ${({ transition }) => transition ? 'translateY(0) ' : 'translateY(50px) '};
+  position: absolute;
+`
+
+export const Rates = styled.div`
+  font-size: ${({ top }) => top ? '16px' : '20px'};
+  font-weight: ${({ top }) => top ? '500' : '700'};
+  color: ${({ top }) => top ? '#000000' : '#0f2e37e6'};
+`
+
+export const RateArrow = styled(ArrowNarrowRight)`
+  width: 20px;
+  margin-right: 5px;
+  margin-top: 2px;
+  color: #186e83;
+`
+
+export const RatesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 5px;
+`
