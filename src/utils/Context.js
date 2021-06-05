@@ -18,7 +18,7 @@ const Context = () => {
     // convert function
     from: 'USD',
     to: 'EUR',
-    amount: 1.01
+    amount: 1.00
   })
 
   const [sOptions, setSOptions] = useState({
@@ -142,9 +142,9 @@ const Context = () => {
 
 
   const handleHideDrop = () => {
-    setTransition({ ...transition, fromSearch: false, toSearch: false })
+    setTransition({ ...transition, fromSearch: false, toSearch: false, amount: false })
     setTimeout(() => {
-      setVisible({ ...isVisible, from: false, to: false });
+      setVisible({ ...isVisible, fromSearch: false, toSearch: false });
     }, 300);
   }
 

@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
-import { Main, Select, InputWrapper, SelectWrapper, Wrapper, ResultsWrapper, Input, SelectContainer, SearchItem, Option, Display, DisplayWrapper, SectionContainer, ConvertButton, ButtonWrapper, Switch, CurrencyDisplay, RatesContainer, RatesHeader, Result, Label } from './Card.elements'
+import { Main, Select, InputWrapper, SelectWrapper, Wrapper, ResultsWrapper, Input, SelectContainer, SearchItem, Option, Display, DisplayWrapper, SectionContainer, ConvertButton, ButtonWrapper, Switch, CurrencyDisplay, RatesContainer, RatesHeader, Result, Label, Rates, RateArrow, RatesWrapper } from './Card.elements'
 import { options, name } from '../../utils/Data'
 import Context from '../../utils/Context'
 import styled from 'styled-components'
-import { ArrowLeftRight } from '@styled-icons/bootstrap/'
+import { ArrowLeftRight, ArrowReturnRight } from '@styled-icons/bootstrap/'
 import { ArrowSwap } from '@styled-icons/fluentui-system-filled/'
-
 const Card = () => {
 
   const {
@@ -33,6 +32,15 @@ const Card = () => {
     return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
   }
 
+  const handleClickAmount = () => {
+    handleHideDrop()
+    setTransition({ ...transition, amount: true })
+  }
+
+  useEffect(() => {
+    console.log(isVisible)
+  }, [isVisible])
+
   return (
     <>
       <div style={{ position: 'relative', alignItems: 'center', display: 'flex', flexDirection: 'column', height: '555px' }}>
@@ -41,7 +49,7 @@ const Card = () => {
 
             <InputWrapper ref={ref}>
               <SectionContainer>
-                <Label highlight={input.amount}>Amount</Label>
+                <Label highlight={transition.amount}>Amount</Label>
                 <form onSubmit={convert}>
                   <Input
                     type={'Number'}
@@ -49,7 +57,7 @@ const Card = () => {
                     placeholder={'AMOUNT'}
                     value={input.amount}
                     onChange={inputChange}
-                    onClick={handleHideDrop}
+                    onClick={handleClickAmount}
                   />
                 </form>
               </SectionContainer>
@@ -86,7 +94,7 @@ const Card = () => {
                       }}
                     />
                     {isVisible.fromSearch &&
-                      <SelectWrapper show={transition.fromSearch}>
+                      <SelectWrapper show={transition.fromSearch} visible={isVisible.fromSearch}>
                         <ul>
                           {sOptions.fromSearch.map((option, index) =>
                             <SearchItem
@@ -170,21 +178,43 @@ const Card = () => {
 
             <RatesContainer>
               <RatesHeader>
-                <strong>RATE</strong>
+                <h3>RATE ({input.from})</h3>
               </RatesHeader>
-              <p>1 {input.from} = </p>
-              <p>{exchange.xRate.toFixed(5)} {input.to} </p>
-              <p>1 {input.to} = </p>
-              <p>{(1 / exchange.xRate).toFixed(5)} {input.from} </p>
+              <RatesWrapper>
+
+                <Rates top={true}>1 {input.fromDisplay.slice(6)} </Rates>
+                <div style={{ display: 'flex' }}>
+                  <RateArrow />
+                  <Rates>{exchange.xRate.toFixed(5)} {input.to} </Rates>
+                </div>
+
+              </RatesWrapper>
             </RatesContainer>
             <RatesContainer>
               <RatesHeader>
-                <strong>CONVERSION TOTAL</strong>
+                <h3>RATE ({input.to})</h3>
               </RatesHeader>
-              <p>{numberWithCommas(parseFloat(input.amount))} {input.from} = </p>
-              <p>{numberWithCommas(parseFloat(exchange.total).toFixed(5))} {input.to}</p>
-            </RatesContainer>
+              <RatesWrapper>
 
+                <Rates top={true}>1 {input.toDisplay.slice(6)} </Rates>
+                <div style={{ display: 'flex' }}>
+                  <RateArrow />
+                  <Rates>{(1 / exchange.xRate).toFixed(5)} {input.from} </Rates>
+                </div>
+              </RatesWrapper>
+            </RatesContainer>
+            <RatesContainer>
+              <RatesHeader>
+                <h3>CONVERSION TOTAL</h3>
+              </RatesHeader>
+              <RatesWrapper>
+                <Rates top={true}>{numberWithCommas(parseFloat(input.amount))} {input.from}(s) </Rates>
+                <div style={{ display: 'flex' }}>
+                  <RateArrow />
+                  <Rates>{numberWithCommas(parseFloat(exchange.total).toFixed(5))} {input.to}</Rates>
+                </div>
+              </RatesWrapper>
+            </RatesContainer>
 
 
           </Result>
