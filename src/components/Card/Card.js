@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Main, InputWrapper, SelectWrapper, Wrapper, ResultsWrapper, Input, SelectContainer, SearchItem, Option, Display, DisplayWrapper, SectionContainer, ConvertButton, ButtonWrapper, Switch, CurrencyDisplay, RatesContainer, RatesHeader, Result, Label, Rates, RateArrow, RatesWrapper } from './Card.elements'
+import { Main, InputWrapper, SelectWrapper, Wrapper, Input, SelectContainer, SearchItem, Option, Display, DisplayWrapper, SectionContainer, ConvertButton, ButtonWrapper, Switch, CurrencyDisplay, RatesContainer, RatesHeader, Result, Label, Rates, RateArrow, RatesWrapper } from './Card.elements'
 import Context from '../../utils/Context'
 import { ArrowSwap } from '@styled-icons/fluentui-system-filled/'
 const Card = () => {
