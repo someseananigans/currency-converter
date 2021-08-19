@@ -1,18 +1,15 @@
-import { useState, useEffect, useRef } from 'react'
-import { Main, Select, InputWrapper, SelectWrapper, Wrapper, ResultsWrapper, Input, SelectContainer, SearchItem, Option, Display, DisplayWrapper, SectionContainer, ConvertButton, ButtonWrapper, Switch, CurrencyDisplay, RatesContainer, RatesHeader, Result, Label, Rates, RateArrow, RatesWrapper } from './Card.elements'
-import { options, name } from '../../utils/Data'
+import { useEffect } from 'react'
+import { Main, InputWrapper, SelectWrapper, Wrapper, ResultsWrapper, Input, SelectContainer, SearchItem, Option, Display, DisplayWrapper, SectionContainer, ConvertButton, ButtonWrapper, Switch, CurrencyDisplay, RatesContainer, RatesHeader, Result, Label, Rates, RateArrow, RatesWrapper } from './Card.elements'
 import Context from '../../utils/Context'
-import styled from 'styled-components'
-import { ArrowLeftRight, ArrowReturnRight } from '@styled-icons/bootstrap/'
 import { ArrowSwap } from '@styled-icons/fluentui-system-filled/'
 const Card = () => {
 
   const {
-    input, inputChange, rates,
-    sOptions, setSOptions,
+    input, inputChange,
+    sOptions,
     setInput, handleClickSearchItem,
     convert, getExchange, exchange,
-    ref, isVisible, setVisible, transition, setTransition, handleHideDrop, handleShowDrop, handleClickOutside, results
+    ref, isVisible, transition, setTransition, handleHideDrop, handleShowDrop, handleClickOutside, results
   } = Context()
 
 
@@ -38,7 +35,7 @@ const Card = () => {
   }
 
   useEffect(() => {
-    console.log(isVisible)
+    // console.log(isVisible)
   }, [isVisible])
 
   return (
@@ -69,7 +66,7 @@ const Card = () => {
                   <Display id={'fromDisplay'} transition={transition.fromSearch}>
                     <p style={{ fontWeight: 600 }}>
                       {input.fromDisplay.slice(0, 3)}&nbsp;
-                  </p>
+                    </p>
                     <CurrencyDisplay>
                       {input.fromDisplay.slice(4)}
                     </CurrencyDisplay>
@@ -121,7 +118,7 @@ const Card = () => {
                   <Display id={'toDisplay'} transition={transition.toSearch}>
                     <p style={{ fontWeight: 600 }}>
                       {input.toDisplay.slice(0, 3)}&nbsp;
-                  </p>
+                    </p>
                     <CurrencyDisplay>
                       {input.toDisplay.slice(4)}
                     </CurrencyDisplay>

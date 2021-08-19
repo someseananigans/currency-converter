@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import { Display } from '../components/Card/Card.elements'
 import { xValues } from '../utils/Data'
 
 
@@ -75,7 +74,10 @@ const Context = () => {
 
     fetch(`http://data.fixer.io/api/latest?access_key=${api_key}`, options)
       .then(res => res.json())
-      .then(data => setRates(data.rates))
+      .then(data => {
+        console.log(data)
+        setRates(data.rates)
+      })
       .catch(err => console.log(err))
   }
 
@@ -84,8 +86,8 @@ const Context = () => {
     // first convert to 1 of from
     // start is 1 eu
     // 1 eu = x of from
-    // 1 / x of from == multiplier(switch from eu)
-    // x of from * rate of to == exchange
+    // 1 / x of from === multiplier(switch from eu)
+    // x of from * rate of to === exchange
     // exchange * multiplier * amount
 
     // change base
@@ -122,11 +124,11 @@ const Context = () => {
     console.log(sOptions)
   }
 
-  const enterSearch = ({ target }) => {
-    // grab one search result and set searchResult
-    // const formattedSearch = searchResult.key + '-' + searchResult.name
-    // setInput({...input, [target.name]: formattedSearch })
-  }
+  // const enterSearch = ({ target }) => {
+  //   // grab one search result and set searchResult
+  //   // const formattedSearch = searchResult.key + '-' + searchResult.name
+  //   // setInput({...input, [target.name]: formattedSearch })
+  // }
 
   const handleClickSearchItem = (value, display, option) => {
     setInput({ ...input, [value]: option.key, [display]: `${option.key + ' - ' + option.name}` })
@@ -149,7 +151,7 @@ const Context = () => {
   }
 
   const handleShowDrop = ({ target }) => {
-    const otherTarget = target.name == 'fromSearch' ? 'fromSearch' : 'toSearch'
+    const otherTarget = target.name === 'fromSearch' ? 'fromSearch' : 'toSearch'
     setVisible({ ...isVisible, [target.name]: true })
     setTimeout(() => {
       setTransition({ results: transition.results, [otherTarget.name]: false, [target.name]: true })
