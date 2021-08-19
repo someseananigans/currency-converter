@@ -1,10 +1,5 @@
-import { useEffect } from 'react'
-import Context from '../utils/Context'
 import styled from 'styled-components'
 import Card from '../components/Card/Card'
-import exchange from '../assets/exchange.svg'
-import background from '../assets/background.jpg'
-import background2 from '../assets/background2.jpg'
 import background3 from '../assets/background3.jpg'
 
 const Home = () => {
@@ -35,10 +30,7 @@ const Main = styled.div`
   background-position: center;
   background-size: cover;
 `
-const Image = styled.img`
-  width: 500px;
-  margin: 20px;
-`
+
 
 const Header = styled.h1`
   font-size: 40px;
