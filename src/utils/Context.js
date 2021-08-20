@@ -72,7 +72,7 @@ const Context = () => {
       // headers: { "Content-Type": "application/json" }
     }
 
-    fetch(`http://data.fixer.io/api/latest?access_key=${api_key}`, options)
+    fetch(`http://data.fixer.io/api/latest?access_key=${api_key}/`, options)
       .then(res => res.json())
       .then(data => {
         console.log(data)
