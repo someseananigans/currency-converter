@@ -9,7 +9,7 @@ const Card = () => {
     sOptions,
     setInput, handleClickSearchItem,
     convert, getExchange, exchange,
-    ref, isVisible, transition, setTransition, handleHideDrop, handleShowDrop, handleClickOutside, results
+    ref, isVisible, transition, setTransition, handleHideDrop, handleShowDrop, handleClickOutside, results, handleSwap
   } = Context()
 
 
@@ -105,7 +105,7 @@ const Card = () => {
                 </DisplayWrapper>
               </SectionContainer>
 
-              <Switch>
+              <Switch onClick={handleSwap}>
                 <ArrowSwap />
               </Switch>
 

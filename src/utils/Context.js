@@ -137,7 +137,9 @@ const Context = () => {
   }
 
 
-
+  const handleSwap = () => {
+    setInput({ ...input, from: input.to, to: input.from, fromDisplay: input.toDisplay, toDisplay: input.fromDisplay })
+  }
 
 
 
@@ -194,7 +196,7 @@ const Context = () => {
     sOptions, setSOptions,
     handleClickSearchItem,
 
-    ref, isVisible, setVisible, transition, setTransition, handleHideDrop, handleShowDrop, handleClickOutside,
+    ref, isVisible, setVisible, transition, setTransition, handleHideDrop, handleShowDrop, handleClickOutside, handleSwap,
     results
   }
 
