@@ -65,10 +65,10 @@ const Card = () => {
                 <DisplayWrapper>
                   <Display id={'fromDisplay'} transition={transition.fromSearch}>
                     <p style={{ fontWeight: 600 }}>
-                      {input.fromDisplay.slice(0, 3)}&nbsp;
+                      {input.fromDisplay.slice(3)}&nbsp;
                     </p>
                     <CurrencyDisplay>
-                      {input.fromDisplay.slice(4)}
+                      {/* {input.fromDisplay.slice(4)} */}
                     </CurrencyDisplay>
                   </Display>
                   <SelectContainer >
@@ -98,7 +98,7 @@ const Card = () => {
                               key={index + 1}
                               onClick={() => handleClickSearchItem('from', 'fromDisplay', option)}
                             >
-                              <Option>{option.key} - {option.name}</Option>
+                              <Option>{option.key.slice(3)} - {option.name}</Option>
                             </SearchItem>
                           )}
                         </ul>
@@ -117,10 +117,10 @@ const Card = () => {
                 <DisplayWrapper>
                   <Display id={'toDisplay'} transition={transition.toSearch}>
                     <p style={{ fontWeight: 600 }}>
-                      {input.toDisplay.slice(0, 3)}&nbsp;
+                      {input.toDisplay.slice(3)}&nbsp;
                     </p>
                     <CurrencyDisplay>
-                      {input.toDisplay.slice(4)}
+                      {/* {input.toDisplay.slice(4)} */}
                     </CurrencyDisplay>
                   </Display>
                   <SelectContainer >
@@ -129,7 +129,7 @@ const Card = () => {
                       autocomplete="off"
                       onClick={handleShowDrop}
                       onChange={inputChange}
-                      value={input.toSearch}
+                      value={input.toSearch.slice}
                       name={'toSearch'}
                       placeholder={''}
                       onFocus={(event) => {
@@ -150,7 +150,7 @@ const Card = () => {
                               key={index + 1}
                               onClick={() => handleClickSearchItem('to', 'toDisplay', option)}
                             >
-                              <Option>{option.key} - {option.name}</Option>
+                              <Option>{option.key.slice(3)} - {option.name}</Option>
                             </SearchItem>
                           )}
                         </ul>
@@ -162,7 +162,7 @@ const Card = () => {
             </InputWrapper>
 
             <ButtonWrapper>
-              <ConvertButton onClick={convert}>CONVERT</ConvertButton>
+              <ConvertButton id="convert" onClick={convert}>CONVERT</ConvertButton>
 
             </ButtonWrapper>
 
@@ -171,32 +171,32 @@ const Card = () => {
         </Main>
 
         {results.reveal &&
-          <Result transition={results.transition}>
+          <Result id='results' transition={results.transition}>
 
             <RatesContainer>
               <RatesHeader>
-                <h3>RATE ({input.from})</h3>
+                <h3>RATE ({input.from.slice(3)})</h3>
               </RatesHeader>
               <RatesWrapper>
 
                 <Rates top={true}>1 {input.fromDisplay.slice(6)} </Rates>
                 <div style={{ display: 'flex' }}>
                   <RateArrow />
-                  <Rates>{exchange.xRate.toFixed(5)} {input.to} </Rates>
+                  <Rates>{exchange.xRate.toFixed(5)} {input.to.slice(3)} </Rates>
                 </div>
 
               </RatesWrapper>
             </RatesContainer>
             <RatesContainer>
               <RatesHeader>
-                <h3>RATE ({input.to})</h3>
+                <h3>RATE ({input.to.slice(3)})</h3>
               </RatesHeader>
               <RatesWrapper>
 
                 <Rates top={true}>1 {input.toDisplay.slice(6)} </Rates>
                 <div style={{ display: 'flex' }}>
                   <RateArrow />
-                  <Rates>{(1 / exchange.xRate).toFixed(5)} {input.from} </Rates>
+                  <Rates>{(1 / exchange.xRate).toFixed(5)} {input.from.slice(3)} </Rates>
                 </div>
               </RatesWrapper>
             </RatesContainer>
@@ -205,10 +205,10 @@ const Card = () => {
                 <h3>CONVERSION TOTAL</h3>
               </RatesHeader>
               <RatesWrapper>
-                <Rates top={true}>{numberWithCommas(parseFloat(input.amount))} {input.from}(s) </Rates>
+                <Rates top={true}>{numberWithCommas(parseFloat(input.amount))} {input.from.slice(3)}(s) </Rates>
                 <div style={{ display: 'flex' }}>
                   <RateArrow />
-                  <Rates>{numberWithCommas(parseFloat(exchange.total).toFixed(5))} {input.to}</Rates>
+                  <Rates>{numberWithCommas(parseFloat(exchange.total).toFixed(5))} {input.to.slice(3)}</Rates>
                 </div>
               </RatesWrapper>
             </RatesContainer>

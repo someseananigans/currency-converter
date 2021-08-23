@@ -12,11 +12,11 @@ const Context = () => {
     fromSearch: '',
     toSearch: '',
     // div display
-    fromDisplay: 'USD - US Dollar',
-    toDisplay: 'EUR - Euro',
+    fromDisplay: 'EURUSD - US Dollar',
+    toDisplay: 'EUREUR - Euro',
     // convert function
-    from: 'USD',
-    to: 'EUR',
+    from: 'EURUSD',
+    to: 'EUREUR',
     amount: 1.00
   })
 
@@ -49,9 +49,9 @@ const Context = () => {
 
 
   const inputChange = ({ target }) => {
-    setInput({ ...input, [target.name]: target.value })
+    setInput({ ...input, [target.name]: `EUR${target.value}` })
     // change setSOptions based off of search
-    relevantSearch(target.name, target.value)
+    relevantSearch(target.name, `EUR${target.value}`)
     if (results.reveal) {
       setResults({ ...results, transition: false })
       setTimeout(() => {
@@ -66,17 +66,17 @@ const Context = () => {
 
 
   const getExchange = () => {
-    const api_key = '0f58f1f6b6fb0c4480a85f64283d3da8'
+    const api_key = '34eca9d22b34a8f77ebe7de351ba880e'
     const options = {
       method: 'GET',
       // headers: { "Content-Type": "application/json" }
     }
 
-    fetch(`http://data.fixer.io/api/latest?access_key=${api_key}/`, options)
+    fetch(`https://api.currencylayer.com/live?access_key=${api_key}&source=eur&format=1`, options)
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        setRates(data.rates)
+        setRates(data.quotes)
       })
       .catch(err => console.log(err))
   }
@@ -163,9 +163,20 @@ const Context = () => {
     }, 500);
   }
 
+
   const handleClickOutside = ({ target }) => {
     if (ref.current && !ref.current.contains(target)) {
+      console.log('test')
       handleHideDrop()
+    }
+    // click away close setResults({ reveal: false, transition: true })
+    if (target.id !== 'convert') {
+      if (target.id !== 'results' && target.parentNode.id !== 'results' && target.parentNode.parentNode.id !== 'results' && target.parentNode.parentNode.parentNode.id !== 'results' && target.parentNode.parentNode.parentNode.parentNode.id !== 'results') {
+        setResults({ reveal: true, transition: false })
+        setTimeout(() => {
+          setResults({ reveal: false, transition: false })
+        }, 300);
+      }
     }
   };
 
