@@ -75,7 +75,6 @@ const Context = () => {
     fetch(`https://api.currencylayer.com/live?access_key=${api_key}&source=eur&format=1`, options)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setRates(data.quotes)
       })
       .catch(err => console.log(err))

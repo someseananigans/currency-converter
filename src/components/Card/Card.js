@@ -34,9 +34,6 @@ const Card = () => {
     setTransition({ ...transition, amount: true })
   }
 
-  useEffect(() => {
-    // console.log(isVisible)
-  }, [isVisible])
 
   return (
     <>
