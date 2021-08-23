@@ -49,9 +49,9 @@ const Context = () => {
 
 
   const inputChange = ({ target }) => {
-    setInput({ ...input, [target.name]: `EUR${target.value}` })
+    setInput({ ...input, [target.name]: `${target.value}` })
     // change setSOptions based off of search
-    relevantSearch(target.name, `EUR${target.value}`)
+    relevantSearch(target.name, `${target.value}`)
     if (results.reveal) {
       setResults({ ...results, transition: false })
       setTimeout(() => {
